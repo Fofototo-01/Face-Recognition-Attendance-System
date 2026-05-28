@@ -1,5 +1,4 @@
 deepface==0.0.79
-dlib==19.21.1
 firebase_admin==4.0.0
 Flask==1.1.2
 numpy==1.19.5

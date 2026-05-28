@@ -1,127 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Face Recognition</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUST Face Attendance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        #header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-        #header img {
-            height: 60px;
-        }
-        #header h1 {
-            display: inline;
-            margin-left: 20px;
-            vertical-align: middle;
-        }
-        #left-column {
-            float: left;
-            width: 25%;
-            padding: 20px;
-        }
-        #right-column {
-            float: right;
-            width: 65%;
-            padding: 20px;
-        }
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-top: 60%;
-            overflow: hidden;
-        }
-        #video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        #footer {
-            clear: both;
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            width: 33.5%;
-            bottom: 0;
-        }
+        body { font-family: 'Roboto', sans-serif; background-color: #f0f2f5; }
+        
+        /* HEADER */
+        .hust-header { background: linear-gradient(90deg, #b71c1c 0%, #8e1515 100%); color: white; padding: 15px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .hust-logo { height: 55px; margin-right: 15px; background: white; padding: 5px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); }
+        .header-title { font-weight: 700; font-size: 1.4rem; text-transform: uppercase; margin: 0; letter-spacing: 0.5px; }
+
+        /* CARDS */
+        .card-custom { border: none; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); background: white; overflow: hidden; }
+        .card-header-custom { background-color: white; border-bottom: 1px solid #eee; padding: 20px; }
+        .card-header-title { color: #b71c1c; font-weight: bold; margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
+        
+        /* CAMERA FEED */
+        .camera-container { background-color: #000; position: relative; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+        .camera-feed { width: 100%; height: auto; display: block; }
+        
+        /* BUTTONS */
+        .btn-action-group { padding: 20px; background: white; }
+        .btn-attendance { background-color: #b71c1c; color: white; font-weight: bold; border: none; transition: all 0.3s; }
+        .btn-attendance:hover { background-color: #a30000; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(183, 28, 28, 0.3); }
+        .btn-register { background-color: #6c757d; color: white; font-weight: bold; border: none; transition: all 0.3s; }
+        .btn-register:hover { background-color: #5a6268; transform: translateY(-2px); }
+
+        /* INSTRUCTIONS */
+        .step-item { display: flex; margin-bottom: 15px; }
+        .step-badge { width: 30px; height: 30px; background-color: #f8d7da; color: #b71c1c; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
+        .step-content h6 { margin: 0 0 5px 0; font-weight: bold; color: #333; }
+        .step-content p { margin: 0; font-size: 0.9rem; color: #666; }
+
+        .hust-footer { background-color: #b71c1c; color: white; text-align: center; padding: 15px 0; margin-top: auto; font-size: 0.85rem; }
     </style>
 </head>
-<body>
-    <div id="header">
-        <img src="https://github.com/turhancan97/Intelligent-Face-Recognition-Attendance-System/assets/22428774/bb426a99-bd13-410d-a21c-e402850af561" alt="Logo">
-        <h1>Welcome to our Face Detection System for our University Attendance System</h1>
-    </div>
+<body class="d-flex flex-column min-vh-100">
 
-    <div id="left-column">
-        <h2>Upload a new face as image</h2>
-        <h3>Click the button below to upload a new face as image</h3>
-        <p>NOTE: This will only work if you are not in our database</p>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <input type="submit" value="Upload">
-        </form>
-        <h2>Add yourself to the attendance list</h2>
-        <h3>Click the button below to recognize your face from the database</h3>
-        <p>NOTE: This will only work if you have already captured a face from the camera</p>
-        <button id="recognize-button">Take Attendance</button>
-        <p>NOTE: If you are a teacher, please click the button below to login to check attendance</p>
-        <button onclick="window.location.href='/teacher_login'">Teacher Login</button>
-    </div>
-    
-    <div id="right-column">
-        <h2>Capture a new face from Camera</h2>
-        <h3>Click the button below to capture a new face from the camera</h3>
-        <p>NOTE: This will only work if you are not in our database</p>
-        <button id="capture-button">Capture</button>
-        <div class="video-container">
-            <iframe id="video" src="/video_feed"></iframe>
+    <div class="hust-header">
+        <div class="container d-flex align-items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Logo_Hust.png" alt="HUST Logo" class="hust-logo">
+            <div>
+                <h1 class="header-title">Hanoi University of Science and Technology</h1>
+                <p class="m-0 opacity-75 small">Intelligent Face Recognition Attendance System</p>
+            </div>
         </div>
     </div>
 
-    <div id="footer">
-        <p>Project by: Turhan Can Kargın</p>
-        <p>Powered by: Python, Flask, OpenCV, Firebase</p>
+    <div class="container my-5">
+        <div class="row g-4">
+            
+            <div class="col-lg-4">
+                <div class="card card-custom h-100">
+                    <div class="card-header-custom">
+                        <h5 class="card-header-title"><i class="bi bi-info-circle-fill"></i> User Guide</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="step-item">
+                            <div class="step-badge">1</div>
+                            <div class="step-content">
+                                <h6>New User Registration</h6>
+                                <p>If you are new, please use the <span class="badge bg-secondary">Gray Button</span> under the camera to register your face.</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-badge">2</div>
+                            <div class="step-content">
+                                <h6>Take Attendance</h6>
+                                <p>Registered users click the <span class="badge bg-danger">Red Button</span> to check-in for class.</p>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 text-muted opacity-25">
+
+                        <h6 class="fw-bold text-secondary mb-3"><i class="bi bi-cloud-upload"></i> Upload Photo (Optional)</h6>
+                        <form action="/upload" method="post" enctype="multipart/form-data">
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" name="file" required>
+                                <button class="btn btn-outline-danger" type="submit">Upload</button>
+                            </div>
+                        </form>
+
+                        <div class="mt-4">
+                            <a href="/teacher_login" class="btn btn-light w-100 border text-danger fw-bold py-2">
+                                <i class="bi bi-shield-lock"></i> Teacher / Admin Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card card-custom h-100 border-0 shadow-lg">
+                    <div class="card-header bg-danger text-white py-3">
+                        <h5 class="m-0 fw-bold text-center"><i class="bi bi-camera-video-fill"></i> Live Camera Feed</h5>
+                    </div>
+                    
+                    <div class="camera-container">
+                        <img src="{{ url_for('video_feed') }}" class="camera-feed" alt="Camera Feed">
+                    </div>
+
+                    <div class="btn-action-group">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <form action="/capture" method="post">
+                                    <button type="submit" class="btn btn-register w-100 py-3 rounded-3 d-flex align-items-center justify-content-center gap-2">
+                                        <i class="bi bi-person-plus-fill fs-4"></i>
+                                        <div class="text-start lh-1">
+                                            <div class="small opacity-75">STEP 1</div>
+                                            <div>REGISTER FACE</div>
+                                        </div>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="col-md-6">
+                                <form action="/recognize" method="post">
+                                    <button type="submit" class="btn btn-attendance w-100 py-3 rounded-3 d-flex align-items-center justify-content-center gap-2">
+                                        <i class="bi bi-qr-code-scan fs-4"></i>
+                                        <div class="text-start lh-1">
+                                            <div class="small opacity-75">STEP 2</div>
+                                            <div>TAKE ATTENDANCE</div>
+                                        </div>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
-    <script>
-        document.getElementById('recognize-button').addEventListener('click', function() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/recognize', true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Redirect to the select class page
-                    window.location.href = '/select_class';
-                }
-            };
-            xhr.send();
-        });
+    <footer class="hust-footer">
+        <div class="container">
+            <p class="m-0 fw-bold">DEVELOPED BY: F4 SO HAND SOME GROUP</p>
+            <p class="m-0 opacity-75">&copy; 2026 Hanoi University of Science and Technology</p>
+        </div>
+    </footer>
 
-    </script>    
-
-    <script>
-        document.getElementById('capture-button').addEventListener('click', function() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/capture', true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Change the location of the window object to the success page
-                    window.location.href = '/add_info';
-                }
-            };
-            xhr.send();
-        });
-    </script>
 </body>
 </html>

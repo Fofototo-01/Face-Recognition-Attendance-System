@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .hust-header { background-color: #b71c1c; color: white; padding: 15px 0; margin-bottom: 40px; }
+        .hust-logo { height: 50px; background: white; border-radius: 50%; padding: 5px; margin-right: 15px; }
+        .result-card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; max-width: 600px; margin: 0 auto; background: white; }
+        .status-header { padding: 25px; text-align: center; color: white; font-weight: bold; font-size: 1.5rem; text-transform: uppercase; }
+        .bg-success { background-color: #28a745 !important; }
+        .bg-warning { background-color: #ffc107 !important; color: #333 !important; }
+        .bg-danger { background-color: #dc3545 !important; }
+        .captured-img { width: 100%; max-width: 350px; border-radius: 10px; border: 5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.15); margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="hust-header">
+        <div class="container d-flex align-items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Logo_Hust.png" alt="Logo" class="hust-logo">
+            <h4 class="m-0 fw-bold">HANOI UNIVERSITY OF SCIENCE AND TECHNOLOGY</h4>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card result-card">
+            <div class="status-header {{ status_class }}">
+                {{ title }}
+            </div>
+            
+            <div class="card-body text-center p-5">
+                <h2 class="fw-bold mb-2">{{ message }}</h2>
+                <p class="text-muted mb-4">{{ detail }}</p>
+
+                <img src="{{ image_url }}" class="captured-img" alt="Face Result">
+                
+                <div class="d-grid gap-2 d-sm-flex justify-content-center mt-4">
+                    <a href="/" class="btn btn-danger btn-lg px-4">
+                        <i class="bi bi-house-door-fill"></i> Back to Home
+                    </a>
+                    
+                    <a href="/" class="btn btn-outline-secondary btn-lg px-4">
+                        <i class="bi bi-arrow-clockwise"></i> Try Again
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="text-center mt-5 text-muted small">
+        &copy; 2026 HUST - Face Attendance System
+    </footer>
+
+</body>
+</html>

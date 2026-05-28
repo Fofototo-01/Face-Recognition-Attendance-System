@@ -7,11 +7,9 @@ from deepface import DeepFace
 from scipy.spatial.distance import cosine
 
 # Path to the shape predictor file
-datFile = "/Users/turhancan97/Library/CloudStorage/OneDrive-AnadoluÜniversitesi-AÖF/Side Projetcs/Others/Güncel Projeler/Face_Recognition_App/Intelligent-Face-Recognition-Attendance-System/detection/shape_predictor_68_face_landmarks.dat"
+datFile = r"C:\Users\ADMIN\Intelligent-Face-Recognition-Attendance-System\detection\shape_predictor_68_face_landmarks.dat"
 
-# Load the cascade
-face_cascade = cv2.CascadeClassifier(
-    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+face_cascade = cv2.CascadeClassifier(    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
 )
 
 # Load the detector and predictor
@@ -167,7 +165,7 @@ def extract_features(face):
     face_rgb = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
 
     # Use the DeepFace model to predict the embedding
-    embedding = DeepFace.represent(face_rgb, model_name="Facenet")
+    embedding = DeepFace.represent(face_rgb, model_name="Facenet", enforce_detection=False)
 
     return embedding
 

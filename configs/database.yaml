@@ -1,6 +1,13 @@
-teacher:
-  password_hash: <enter-your-teacher-login-hash>
 firebase:
-  databaseURL: <enter-your-databaseURL>
-  storageBucket: <enter-your-storageBucket>
-  pathToServiceAccount: <enter-your-serviceAccountKey-path>
+  apiKey: "để trống"
+  authDomain: "để trống"
+  databaseURL: "https://fofohuhu-c7b9d-default-rtdb.firebaseio.com"
+  projectId: "fofohuhu-c7b9d"
+  storageBucket: "để trống"
+  messagingSenderId: "để trống"
+  appId: "để trống"
+  measurementId: "để trống"
+  pathToServiceAccount: "serviceAccountKey.json"
+
+teacher:
+  password_hash: "pbkdf2:sha256:150000$JhpyWf8u$b97cdfc1fcd9471669cdad8ffcc7e0558dfdd8837f1f6f2d833b62f8c26e093a"
