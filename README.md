@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Implementation of Biometric Logic - Automated Attendance System
 
 <div align="center">
@@ -145,4 +144,4 @@ python app.py
 =======
 # Face-Recognition-Attendance-System
 This is my first project applying OpenCV to deal with the recognized attendance. 
->>>>>>> cafe8d5a530838c6a94ba6c8b2ee93a9d3b3c420
+
