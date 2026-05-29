@@ -157,7 +157,7 @@ def recognize():
 # --- TRANG CHỌN LỚP (SỬA LỖI TRÔI TRANG) ---
 @app.route("/select_class", methods=["GET", "POST"])
 def select_class():
-    # 1. Kiểm tra xem người dùng đã được nhận diện chưa?
+    # 1. Kiểm tra xem người dùng đã được nhận diện chưa?git remote add origin https://github.com/Fofototo-01/Biometric-Logic-Attendance.git
     current_user = session.get('user_name') # Lấy tên từ session
     
     if not current_user:
