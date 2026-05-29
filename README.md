@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Implementation of Biometric Logic - Automated Attendance System
 
 <div align="center">
@@ -141,3 +142,7 @@ Add your Firebase Service Account .json key to the project root and update confi
 ```bash
 python app.py
 ```
+=======
+# Face-Recognition-Attendance-System
+This is my first project applying OpenCV to deal with the recognized attendance. 
+>>>>>>> cafe8d5a530838c6a94ba6c8b2ee93a9d3b3c420
